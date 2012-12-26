@@ -28,6 +28,7 @@ class Plateau:
             for y in range(0, self.size[1]):
                 if not self.map.walkable((x, y)):
                     self.draw_rect((x, y), 0x000000)
+        pygame.display.flip()
 
     def run(self):
         self.screen = pygame.display.set_mode(self.res)
@@ -56,9 +57,7 @@ class Plateau:
                 else:
                     color = 0xffffff
                     self.map.remove(pos)
-                pygame.draw.rect(self.screen, color,
-                        pygame.Rect(pos[0]*self.dim[0]+1, pos[1]*self.dim[1]+1,
-                            self.dim[0]-1, self.dim[1]-1))
+                self.draw_rect(pos, color)
                 pygame.display.flip()
 
             if ev.type == pygame.MOUSEBUTTONUP and ev.button == 3 \
@@ -66,6 +65,7 @@ class Plateau:
                 if self.start == None:
                     self.start = pos
                     self.draw_rect(pos, 0x00ff00)
+                    pygame.display.flip()
                 elif self.end == None:
                     self.end = pos
                     self.draw_rect(pos, 0xff0000)
@@ -77,6 +77,7 @@ class Plateau:
                     self.refresh()
                     self.start = pos
                     self.draw_rect(pos, 0x00ff00)
+                    pygame.display.flip()
             elif ev.type == pygame.MOUSEBUTTONUP and ev.button == 2:
                 self.clean()
                 self.map = jps.Map(self.size)
@@ -85,7 +86,6 @@ class Plateau:
         pygame.draw.rect(self.screen, color,
             pygame.Rect(pos[0]*self.dim[0]+1, pos[1]*self.dim[1]+1,
                 self.dim[0]-1, self.dim[1]-1))
-        pygame.display.flip()
 
     def print_solution(self):
         print(self.solution)

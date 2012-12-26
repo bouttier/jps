@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 #-*- coding: utf-8 -*-
 import ctypes
 
@@ -85,7 +85,7 @@ def compute(map, _start, _end):
     return sol
 
 if __name__ == "__main__":
-    m = Map(80, 20)
+    m = Map((80, 20))
     m.add_rectangle(2, 4, 2, 2)
     m.add_circle(20, 10, 7)
     print(m)
