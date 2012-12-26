@@ -7,6 +7,8 @@
 
 #include "priority_queue.h"
 
+#define VERBOSE 0
+
 // Quelle distance approximative doit être utilisé ?
 #define CHEBYSHEV
 //#define ENCLIDEAN
@@ -34,6 +36,10 @@ static direction move_direction(map_t * m, node_t start, node_t end);
 
 int jps_compute(map_t * m, coord_t _start, coord_t _end, solution * sol)
 {
+#if VERBOSE > 0
+    printf("Compute path from (%d, %d) to (%d, %d) on a %dx%d map\n",
+            _start.x, _start.y, _end.x, _end.y, m->width, m->height);
+#endif
     int start = get_node(m, _start);
     int end = get_node(m, _end);
     int size = m->width * m->height;
@@ -120,6 +126,7 @@ int jps_compute(map_t * m, coord_t _start, coord_t _end, solution * sol)
 #if VERBOSE > 1
         printf("Ended search because of blocked path\n");
 #endif
+        return 0;
     }
     pqueue_destroy(&pq);
 

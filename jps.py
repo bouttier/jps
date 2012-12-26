@@ -5,7 +5,7 @@ import ctypes
 libjps = ctypes.CDLL("libjps.so")
 
 class Map:
-    def __init__(self, _width, _height):
+    def __init__(self, (_width, _height)):
         self.jps = libjps
         self.width = _width
         self.height = _height
@@ -13,12 +13,12 @@ class Map:
         height = ctypes.c_int(_height)
         self.map = ctypes.c_void_p(self.jps.map_create(width, height))
 
-    def add(self, _x, _y):
+    def add(self, (_x, _y)):
         x = ctypes.c_int(_x)
         y = ctypes.c_int(_y)
         self.jps.map_add_point(self.map, x, y)
 
-    def remove(self, _x, _y):
+    def remove(self, (_x, _y)):
         x = ctypes.c_int(_x)
         y = ctypes.c_int(_y)
         self.jps.map_remove_point(self.map, x, y)
@@ -49,7 +49,7 @@ class Map:
         radius = ctypes.c_double(_radius)
         self.jps.map_remove_circle(self.map, x, y, radius)
 
-    def state(self, x, y):
+    def walkable(self, (x, y)):
         c = Coord()
         c.x = ctypes.c_int(x)
         c.y = ctypes.c_int(y)
@@ -76,11 +76,12 @@ def compute(map, _start, _end):
     solArray = ctypes.POINTER(Coord)()
     solLen = libjps.jps_compute(map.map, start, end, ctypes.pointer(solArray))
     sol = list()
-    for i in range(0, solLen):
-        c = solArray[i]
-        sol.append((c.x, c.y))
-    sol.reverse()
-    libjps.jps_free(ctypes.pointer(solArray))
+    if solLen > 0:
+        for i in range(0, solLen):
+            c = solArray[i]
+            sol.append((c.x, c.y))
+        sol.reverse()
+        libjps.jps_free(ctypes.pointer(solArray))
     return sol
 
 if __name__ == "__main__":

@@ -5,3 +5,5 @@ archlinux/jps-*.src.tar.gz
 build
 tags
 *.swp
+*.pyc
+__pycache__
