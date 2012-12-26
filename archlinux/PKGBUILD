@@ -1,0 +1,43 @@
+# Maintener: Élie Bouttier <elie.bouttier@free.fr>
+
+pkgname=jps-git
+pkgver=20121226
+pkgrel=1
+pkgdesc="A* + Jump Point Search algorithm C library with python wrapper"
+arch=('any')
+url="http://github.com/bouttier/jps/"
+license=('GPL')
+depends=('python')
+makedepends=('git' 'cmake')
+conflicts=('jps')
+provides=('jps')
+
+_gitroot=http://github.com/bouttier/jps.git
+_gitname=jps
+
+build() {
+    cd "$srcdir"
+    msg "Connecting to GIT server..."
+
+    if [[ -d "$_gitname" ]]; then
+        cd "$_gitname" && git pull origin
+        msg "The local files are updated."
+    else
+        git clone "$_gitroot" "$_gitname"
+    fi  
+
+    msg "GIT checkout done or server timeout"
+    msg "Starting make..."
+
+    rm -rf "$srcdir/$_gitname/build"
+    mkdir "$srcdir/$_gitname/build"
+    cd "$srcdir/$_gitname/build"
+
+    cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+    make
+}
+
+package() {
+    cd "$srcdir/$_gitname/build"
+    make DESTDIR="$pkgdir/" install
+}

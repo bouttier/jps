@@ -1,3 +1,7 @@
+archlinux/src
+archlinux/pkg
+archlinux/jps-*.tar.xz
+archlinux/jps-*.src.tar.gz
 build
 tags
 *.swp
