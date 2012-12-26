@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-import pygame, time, jps
+import pygame, time, jps, sys
 
 class Plateau:
     def __init__(self, size, dim):
@@ -103,6 +103,16 @@ class Plateau:
         pygame.display.flip()
 
 if __name__ == "__main__":
-    # Taille de la map, puis taille de chaque carré en pixel
-    p = Plateau((150, 75), (8, 8))
+    
+    size = (150, 75) # Taille de la map
+    dim = (8, 8) # Taille en pixel d’un carré de la map
+
+    if len(sys.argv) > 2:
+        size = (int(sys.argv[1]), int(sys.argv[2]))
+    if len(sys.argv) > 4:
+        dim = (int(sys.argv[3]), int(sys.argv[4]))
+    elif len(sys.argv) > 3:
+        dim = (int(sys.argv[3]), int(sys.argv[3]))
+
+    p = Plateau(size, dim)
     p.run()
