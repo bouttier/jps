@@ -42,6 +42,9 @@ void map_remove_rectangle(map_t * map, int x, int y, int width, int height);
 void map_add_circle(map_t * map, int x, int y, double radius);
 void map_remove_circle(map_t * map, int x, int y, double radius);
 
+/* Savoir si un point peut être parcouru ou non */
+int map_walkable(map_t * map, coord_t point);
+
 /* Afficher une carte dans le terminal */
 void map_print(map_t * map);
 

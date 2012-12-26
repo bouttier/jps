@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#-*- coding: utf-8 -*-
 import ctypes
 
 libjps = ctypes.CDLL("libjps.so")
@@ -10,46 +11,54 @@ class Map:
         self.height = _height
         width = ctypes.c_int(_width)
         height = ctypes.c_int(_height)
-        self.map = ctypes.c_void_p(self.jps.map_create(width, height));
+        self.map = ctypes.c_void_p(self.jps.map_create(width, height))
 
     def add(self, _x, _y):
         x = ctypes.c_int(_x)
         y = ctypes.c_int(_y)
-        self.jps.map_add_point(self.map, x, y);
+        self.jps.map_add_point(self.map, x, y)
 
     def remove(self, _x, _y):
         x = ctypes.c_int(_x)
         y = ctypes.c_int(_y)
-        self.jps.map_remove_point(self.map, x, y);
+        self.jps.map_remove_point(self.map, x, y)
 
     def add_rectangle(self, _x, _y, _width, _height):
         x = ctypes.c_int(_x)
         y = ctypes.c_int(_y)
         width = ctypes.c_int(_width)
         height = ctypes.c_int(_height)
-        self.jps.map_add_rectangle(self.map, x, y, width, height);
+        self.jps.map_add_rectangle(self.map, x, y, width, height)
 
     def remove_rectangle(self, _x, _y, _width, _height):
         x = ctypes.c_int(_x)
         y = ctypes.c_int(_y)
         width = ctypes.c_int(_width)
         height = ctypes.c_int(_height)
-        self.jps.map_del_rectangle(self.map, x, y, width, height);
+        self.jps.map_del_rectangle(self.map, x, y, width, height)
 
     def add_circle(self, _x, _y, _radius):
         x = ctypes.c_int(_x)
         y = ctypes.c_int(_y)
         radius = ctypes.c_double(_radius)
-        self.jps.map_add_circle(self.map, x, y, radius);
+        self.jps.map_add_circle(self.map, x, y, radius)
 
     def remove_circle(self, _x, _y, _radius):
         x = ctypes.c_int(_x)
         y = ctypes.c_int(_y)
         radius = ctypes.c_double(_radius)
-        self.jps.map_remove_circle(self.map, x, y, radius);
+        self.jps.map_remove_circle(self.map, x, y, radius)
 
-    def print(self):
+    def state(self, x, y):
+        c = Coord()
+        c.x = ctypes.c_int(x)
+        c.y = ctypes.c_int(y)
+        i = self.jps.map_walkable(self.map, c)
+        return not i == 0
+
+    def __str__(self):
         libjps.map_print(self.map)
+        return "This is a %d×%d map" %(self.width, self.height)
 
     def __del__(self):
         self.jps.map_destroy(self.map)
@@ -78,6 +87,6 @@ if __name__ == "__main__":
     m = Map(80, 20)
     m.add_rectangle(2, 4, 2, 2)
     m.add_circle(20, 10, 7)
-    m.print()
+    print(m)
     sol = compute(m, (3, 3), (25, 5))
     print(sol)

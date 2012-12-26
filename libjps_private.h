@@ -11,7 +11,5 @@ struct map_t {
 
 /* Savoir si un point est dans la carte ou à l’extérieur */
 int map_contains(map_t * map, coord_t point);
-/* Savoir si un point peut être parcouru ou si il contient un obstacle */
-int map_walkable(map_t * map, coord_t point);
 
 #endif
