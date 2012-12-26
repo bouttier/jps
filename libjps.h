@@ -32,7 +32,9 @@ map_t * map_copy(map_t * src);
 /* Détruire une carte */
 void map_destroy(map_t * map);
 
-
+/* Ajouter un supprimer un obstacle poncutel */
+void map_add_point(map_t * map, int x, int y);
+void map_remove_point(map_t * map, int x, int y);
 /* Ajouter ou supprimer un obstacle rectangulaire */
 void map_add_rectangle(map_t * map, int x, int y, int width, int height);
 void map_remove_rectangle(map_t * map, int x, int y, int width, int height);

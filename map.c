@@ -47,8 +47,22 @@ void map_destroy(map_t * m)
     free(m);
 }
 
+/** Ajouter ou supprimer un obstacle ponctuel */
+static void map_set_point(map_t * m, int x, int y, char value)
+{
+    cell(m, x, y) = value;
+}
+void map_add_point(map_t * m, int x, int y)
+{
+    map_set_point(m, x, y, 1);
+}
+void map_remove_point(map_t * m, int x, int y)
+{
+    map_set_point(m, x, y, 0);
+}
+
 /** Ajouter ou supprimer un obstacle rectangulaire */
-static void map_rectangle(map_t * m,
+static void map_set_rectangle(map_t * m,
         int x, int y, int width, int height, char value)
 {
     int i, j;
@@ -60,15 +74,15 @@ static void map_rectangle(map_t * m,
 }
 void map_add_rectangle(map_t * m, int x, int y, int width, int height)
 {
-    map_rectangle(m, x, y, width, height, 1);
+    map_set_rectangle(m, x, y, width, height, 1);
 }
 void map_remove_rectangle(map_t * m, int x, int y, int width, int height)
 {
-    map_rectangle(m, x, y, width, height, 0);
+    map_set_rectangle(m, x, y, width, height, 0);
 }
 
 /** Ajouter ou supprimer un obstacle circulaire */
-static void map_circle(map_t * m,
+static void map_set_circle(map_t * m,
         int x, int y, double radius, char value)
 {
     int i, j;
@@ -82,11 +96,11 @@ static void map_circle(map_t * m,
 }
 void map_add_circle(map_t * m, int x, int y, double radius)
 {
-    map_circle(m, x, y, radius, 1);
+    map_set_circle(m, x, y, radius, 1);
 }
 void map_remove_circle(map_t * m, int x, int y, double radius)
 {
-    map_circle(m, x, y, radius, 0);
+    map_set_circle(m, x, y, radius, 0);
 }
 
 /** Afficher une carte */

@@ -12,6 +12,16 @@ class Map:
         height = ctypes.c_int(_height)
         self.map = ctypes.c_void_p(self.jps.map_create(width, height));
 
+    def add(self, _x, _y):
+        x = ctypes.c_int(_x)
+        y = ctypes.c_int(_y)
+        self.jps.map_add_point(self.map, x, y);
+
+    def remove(self, _x, _y):
+        x = ctypes.c_int(_x)
+        y = ctypes.c_int(_y)
+        self.jps.map_remove_point(self.map, x, y);
+
     def add_rectangle(self, _x, _y, _width, _height):
         x = ctypes.c_int(_x)
         y = ctypes.c_int(_y)
