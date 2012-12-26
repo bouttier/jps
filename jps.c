@@ -7,7 +7,7 @@
 
 #include "priority_queue.h"
 
-//#define VERBOSE 0
+#define VERBOSE 0
 
 // Quelle distance approximative doit être utilisé ?
 #define CHEBYSHEV
@@ -54,11 +54,15 @@ int jps_compute(map_t * m, coord_t _start, coord_t _end, solution * sol)
     pqueue_t  * pq;
     pqueue_create(&pq, 10); // FIXME
     pqueue_insert(pq, start, distance_estimate(_start, _end));
+
+    node_t node;
+    coord_t coord;
+    item i;
+
     while (pq->size) {
-        item i = pqueue_get_min(pq);
-        //double dist = i.priority;
-        node_t node = i.value;
-        coord_t coord = get_coord(m, node);
+        i = pqueue_get_min(pq);
+        node = i.value;
+        coord = get_coord(m, node);
 #if VERBOSE > 1
         printf("Explore node %d (%d, %d)\n", node, coord.x, coord.y);
 #endif
@@ -122,7 +126,7 @@ int jps_compute(map_t * m, coord_t _start, coord_t _end, solution * sol)
             }
         }
     }
-    if (!pq->size) {
+    if (node != end) {
 #if VERBOSE > 1
         printf("Ended search because of blocked path\n");
 #endif
@@ -133,17 +137,17 @@ int jps_compute(map_t * m, coord_t _start, coord_t _end, solution * sol)
     *sol = malloc(size * sizeof(**sol));
     node_t pending = end;
     coord_t pendingCoord;
-    int i = 0;
+    int k = 0;
     while (pending != start) {
         pendingCoord = get_coord(m, pending);
-       (*sol)[i++] = pendingCoord;
+       (*sol)[k++] = pendingCoord;
        pending = cameFrom[pending];
     }
     pendingCoord = get_coord(m, start);
-    (*sol)[i++] = pendingCoord;
-    *sol = realloc(*sol, i * sizeof(*sol));
+    (*sol)[k++] = pendingCoord;
+    *sol = realloc(*sol, k * sizeof(*sol));
 
-    return i;
+    return k;
 }
 
 void jps_print(int length, solution sol)
