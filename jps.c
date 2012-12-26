@@ -7,7 +7,7 @@
 
 #include "priority_queue.h"
 
-#define VERBOSE 0
+//#define VERBOSE 0
 
 // Quelle distance approximative doit être utilisé ?
 #define CHEBYSHEV

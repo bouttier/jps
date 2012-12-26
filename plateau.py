@@ -70,7 +70,6 @@ class Plateau:
                     self.end = pos
                     self.draw_rect(pos, 0xff0000)
                     print("Compute path from %s to %s" %(self.start, self.end))
-                    print(self.map)
                     self.solution = jps.compute(self.map, self.start, self.end)
                     self.print_solution()
                     self.draw_solution()
