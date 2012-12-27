@@ -85,6 +85,9 @@ int jps_compute(map_t * m, coord_t _start, coord_t _end, solution * sol)
         direction dir;
         for (dir = directionset_next(&dirs) ; dir != NO_DIRECTION ;
                 dir = directionset_next(&dirs)) {
+#if VERBOSE > 2
+            printf("Explore direction %d\n", dir);
+#endif
             node_t newNode = jump(m, end, coord, dir);
             coord_t newCoord = get_coord(m, newNode);
 #if VERBOSE > 2
@@ -235,13 +238,15 @@ static directionset forced_neighdirs(map_t * m, coord_t pos, direction dir)
     if (direction_is_diagonal(dir)) {
         if (WALKABLE(6) && !WALKABLE(5)) {
             directionset_add(&dirs, (dir + 6) % 8);
-        } else if (WALKABLE(2) && !WALKABLE(3)) {
+        }
+        if (WALKABLE(2) && !WALKABLE(3)) {
             directionset_add(&dirs, (dir + 2) % 8);
         }
     } else {
         if (WALKABLE(1) && !WALKABLE(2)) {
             directionset_add(&dirs, (dir + 1) % 8);
-        } else if (WALKABLE(7) && !WALKABLE(6)) {
+        }
+        if (WALKABLE(7) && !WALKABLE(6)) {
             directionset_add(&dirs, (dir + 7) % 8);
         }
     }
