@@ -42,8 +42,6 @@ class Plateau:
             posPixel = pygame.mouse.get_pos() # position de la souris
             pos = ((posPixel[0]) / self.dim[0], (posPixel[1]) / self.dim[1])
 
-            #print("Position - x: " + str(pos[0]) + ", y: " + str(pos[1]))
-
             if ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1:
                 self.obstacle = self.map.walkable(pos)
             if ev.type == pygame.MOUSEBUTTONUP and ev.button == 1:
