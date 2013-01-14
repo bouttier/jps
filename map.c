@@ -8,8 +8,28 @@
 
 #define cell(m, i, j)   ((m)->map[(j)*(m)->width+(i)])
 
-#define min(x, y)   ((x<y)?x:y)
-#define max(x, y)   ((x<y)?y:x)
+#define min(x, y)   (((x)<(y))?(x):(y))
+#define max(x, y)   (((x)<(y))?(y):(x))
+
+map_t * map_create(int width, int height);
+map_t * map_copy(map_t * src);
+void map_destroy(map_t * m);
+
+static void map_set_point(map_t * m, int x, int y, char value);
+void map_add_point(map_t * m, int x, int y);
+void map_remove_point(map_t * m, int x, int y);
+
+static void map_set_rectangle(map_t * m, int x, int y, int width, int height, char value);
+void map_add_rectangle(map_t * m, int x, int y, int width, int height);
+void map_remove_rectangle(map_t * m, int x, int y, int width, int height);
+
+static void map_set_circle(map_t * m, int x, int y, double radius, char value);
+void map_add_circle(map_t * m, int x, int y, double radius);
+void map_remove_circle(map_t * m, int x, int y, double radius);
+void map_print(map_t * m);
+int map_contains(map_t * m, coord_t coord);
+int map_walkable(map_t * m, coord_t coord);
+
 
 /** Créer une carte aux dimensions spécifiées */
 map_t * map_create(int width, int height)
@@ -52,10 +72,12 @@ static void map_set_point(map_t * m, int x, int y, char value)
 {
     cell(m, x, y) = value;
 }
+
 void map_add_point(map_t * m, int x, int y)
 {
     map_set_point(m, x, y, 1);
 }
+
 void map_remove_point(map_t * m, int x, int y)
 {
     map_set_point(m, x, y, 0);
@@ -72,10 +94,12 @@ static void map_set_rectangle(map_t * m,
         }
     }
 }
+
 void map_add_rectangle(map_t * m, int x, int y, int width, int height)
 {
     map_set_rectangle(m, x, y, width, height, 1);
 }
+
 void map_remove_rectangle(map_t * m, int x, int y, int width, int height)
 {
     map_set_rectangle(m, x, y, width, height, 0);
@@ -94,10 +118,12 @@ static void map_set_circle(map_t * m,
         }
     }
 }
+
 void map_add_circle(map_t * m, int x, int y, double radius)
 {
     map_set_circle(m, x, y, radius, 1);
 }
+
 void map_remove_circle(map_t * m, int x, int y, double radius)
 {
     map_set_circle(m, x, y, radius, 0);

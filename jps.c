@@ -43,16 +43,33 @@ int jps_compute(map_t * m, coord_t _start, coord_t _end, solution * sol)
     int start = get_node(m, _start);
     int end = get_node(m, _end);
     int size = m->width * m->height;
-    char * closed = calloc(size, sizeof(*closed)); // FIXME
-    double *  scores = malloc(size * sizeof(*scores)); // FIXME
+    char * closed = calloc(size, sizeof(*closed));
+	if(closed == NULL)
+	{
+		printf("Impossible d'allouer assez de mémoire pour closed.\n");
+		exit(EXIT_FAILURE);
+	}
+
+    double *  scores = malloc(size * sizeof(*scores));
+	if(closed == NULL)
+	{
+		printf("Impossible d'allouer assez de mémoire pour scores.\n");
+		exit(EXIT_FAILURE);
+	}
+
     memset(scores, -1, size);
     scores[start] = 0;
-    int * cameFrom = malloc(size * sizeof(*cameFrom)); // FIXME
+    int * cameFrom = malloc(size * sizeof(*cameFrom));
+	if(closed == NULL)
+	{
+		printf("Impossible d'allouer assez de mémoire pour cameFrom.\n");
+		exit(EXIT_FAILURE);
+	}
     //memset(cameFrom, -1, size);
     cameFrom[start] = start;
 
     pqueue_t  * pq;
-    pqueue_create(&pq, 10); // FIXME
+    pqueue_create(&pq, 10);
     pqueue_insert(pq, start, distance_estimate(_start, _end));
 
     node_t node;
