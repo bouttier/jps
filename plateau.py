@@ -105,6 +105,10 @@ if __name__ == "__main__":
     size = (150, 75) # Taille de la map
     dim = (8, 8) # Taille en pixel d’un carré de la map
 
+    print("Usage: %s [WIDTH HEIGHT] [SQUARE SIZE]" %sys.argv[0])
+    print("where WIDTH  HEIGHT := map’s dimension")
+    print("      SQUARE SIZE := square size in pixel")
+
     if len(sys.argv) > 2:
         size = (int(sys.argv[1]), int(sys.argv[2]))
     if len(sys.argv) > 4:
