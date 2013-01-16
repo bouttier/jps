@@ -87,8 +87,8 @@ développant que là où nécessaire ; pour cela, il utilise deux règles :
 \includegraphics[width=0.5\linewidth]{obstacle.png}
 \caption{Cas d'un obstacle}
 \end{subfigure}
-\caption{En rouge, les voisin éliminés, en vert, les voisin à explorer, en noir,
-les obstacles, en gris clair, le point courant, en gris foncé le point d'origine}
+\caption{En rouge, les voisins éliminés, en vert, les voisins à explorer, en 
+noir, les obstacles, en gris clair, le point courant et en gris foncé le point d'origine}
 \end{figure}
 
 Dans le cas où l'exploration dans la direction courante est arrêtée par un
@@ -102,9 +102,9 @@ la poursuite de l'exploration de la direction courante échoue.
 
 Enfin, l'algorithme A* est appliqué à chacun des nœuds marqués par JPS jusqu'à
 trouver le point cible, qui est alors relié au 
-nœud qui a permis de le trouver. Précisons que l’algorithme fonctionne en une
-seule étape : il ne s’agit pas de déterminer les \emph{jump point} puis
-d’utiliser l'algorithme A*, les \emph{jump point} sont déterminé au fur et à
+nœud qui a permis de le trouver. Précisons que l'algorithme fonctionne en une
+seule étape : il ne s’agit pas de déterminer les \emph{jump points} puis
+d’utiliser l'algorithme A*, les \emph{jump points} sont déterminés au fur et à
 mesure de l’exploration par l'algorithme A*.
 
 \section{Performances}
@@ -112,23 +112,23 @@ Le nombre de nœuds développé en utilisant l'algorithme JPS se trouve
 de toute évidence considérablement réduit. Ceci est encore plus vrai si la zone
 à explorer possède peu d’obstacle.
 
-L’utilisation de l’algorithme A* est dans certain cas tellement lente, qu’on
-procède à une première étape de squelétisation, afin de lancer l’algorithme sur
+L’utilisation de l’algorithme A* est dans certain cas tellement lente qu’on
+procède à une première étape de squelettisation afin de lancer l’algorithme sur
 un graphe de moins grande envergure. Bien que l’utilisation de l’A* sur ce
 nouveau graphe se trouve être plus rapide que l’utilisation du JPS sur
 l’ancien, ce dernier se trouve dans la grande majorité des cas être globalement
-plus rapide ne nécessitant pas de pré traitement.
+plus rapide car ne nécessitant pas de pré-traitement.
 
-Bien que présentant globalement de meilleurs performances, l'utilisation de
-l'algorithme JPS pose des contraintes sur le déplacement, puisqu'il requière
+Bien que présentant globalement de meilleures performances, l'utilisation de
+l'algorithme JPS pose des contraintes sur le déplacement, puisqu'il requiert
 absolument la possibilité du déplacement en diagonal et l'utilisation de la
-distance quadratique comme heuristique. Soulignons tous de même
+distance quadratique comme heuristique. Soulignons tout de même
 que l'algorithme propose une solution optimale !
 
 \section{Implémentation}
 Nous avons décidé d'implémenter le cœur de l'algorithme sous la forme d’une
-bibliothèque partagé, codé en C afin de bénéficier
-au mieux de la rapidité des langages compilés.
+bibliothèque partagée, codée en C afin de bénéficier
+au mieux de la rapidité du code natif.
 
 Toutefois, dans le but de simplifier son utilisation et son interfaçage avec des
 programmes de test, nous avons écrit un 
