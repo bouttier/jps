@@ -3,9 +3,16 @@ Petite bibliothèque C pour la recherche de chemin en utilisant les algorithme A
 en évitant le développement de certain nœuds inutilement, tout en garantissant
 que le chemin obtenu est de coup minimal.
 
+Ce paquage contient également un wrapper python, qui propose un objet Map, et
+une méthode compute.
+
+Trois programmes python d’exemple utilisant ce wrapper sont fournit :
+* plateau.py : éditeur graphique de carte
+* from_image.py : charge une carte depuis une image et lance l’éditeur graphique
+* from_image_cli.py : charge une carte depuis une image et lance la résolution
+Les images Matlab™ fonctionnent parfaitement.
+
 Source:
     http://harablog.wordpress.com/2011/09/07/jump-point-search/
     http://grastien.net/ban/articles/hg-aaai11.pdf
     http://github.com/arirahikkala/astar-jps
-
-Ce paquage contient également un wrapper python.
