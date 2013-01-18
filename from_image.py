@@ -123,5 +123,5 @@ if __name__ == "__main__":
 		print "\nUtilisation:\n\t"+str(sys.argv[0])+" map\n"
 		sys.exit(1)
 	
-	render = Render((8,8), sys.argv[1])
+	render = Render((3,3), sys.argv[1])
 	render.run()
