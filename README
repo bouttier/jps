@@ -6,6 +6,8 @@ que le chemin obtenu est de coup minimal.
 Ce paquage contient également un wrapper python, qui propose un objet Map, et
 une méthode compute.
 
+Pour la compilation, voir BUILD.
+
 Trois programmes python d’exemple utilisant ce wrapper sont fournit :
 * plateau.py : éditeur graphique de carte
 * from_image.py : charge une carte depuis une image et lance l’éditeur graphique

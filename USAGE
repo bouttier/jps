@@ -1,3 +1,6 @@
+Tous les programmes python nécessite d’abord l’installation de la bibliothèque
+C. Pour cela, voir le fichier BUILD.
+
 Interface graphique
 -------------------
 Usage: ./plateau.py [WIDTH HEIGHT] [SQUARE SIZE]
@@ -18,4 +21,8 @@ d’arrivé de l’algorithme. À défaut, l’algorithme cherche un chemin mena
 l’angle supérieur gauche à l’angle inférieur droit.
 
 La couleur du pixel en haut à gauche de l’image est considéré comme espace
-libre, toutes autres couleurs est assimilé à un obstacle.
+libre, toutes autres couleurs est assimilé à un obstacle. Le fichier map1.png
+peut être utilisé pour tester.
+
+Il est possible que vous ayez besoin du paquet « python2-imaging » (si la
+bibliothèque PIL n’est pas reconnu).
