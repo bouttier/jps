@@ -11,6 +11,7 @@ Trois programmes python d’exemple utilisant ce wrapper sont fournit :
 * from_image.py : charge une carte depuis une image et lance l’éditeur graphique
 * from_image_cli.py : charge une carte depuis une image et lance la résolution
 Les images Matlab™ fonctionnent parfaitement.
+Pour leur utilisation, voir USAGE.
 
 Source:
     http://harablog.wordpress.com/2011/09/07/jump-point-search/
