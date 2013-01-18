@@ -1,5 +1,8 @@
 #!/usr/bin/env python2
 #-*- coding: utf-8 -*-
+
+# Wrapper python pour la lib jps.
+
 import ctypes
 
 libjps = ctypes.CDLL("libjps.so")
